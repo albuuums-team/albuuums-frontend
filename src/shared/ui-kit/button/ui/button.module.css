@@ -6,16 +6,13 @@
   padding: 15px 22px;
   border: none;
 
-  border-radius: 30px;
-  background: #1e1e1e;
-
   color: #fff;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
-}
 
-.button:hover {
+  border-radius: 30px;
+  background: #1e1e1e;
   cursor: pointer;
 }
