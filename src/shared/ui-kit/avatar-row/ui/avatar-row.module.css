@@ -1,0 +1,9 @@
+.avatar-row {
+  margin-left: 6px;
+  display: flex;
+}
+
+.avatar-row > * {
+  position: relative;
+  margin-left: -6px;
+}
