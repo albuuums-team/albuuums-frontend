@@ -3,7 +3,7 @@ import style from "./avatar.module.css";
 
 import Image from "next/image";
 
-type AvatarSize = "s" | "m" | "l";
+type AvatarSize = "s" | "l";
 
 interface AvatarProps {
   src: string;
@@ -14,28 +14,33 @@ interface AvatarProps {
 const getAvatarSize = (size: AvatarSize) => {
   switch (size) {
     case "l":
-      return 45;
-    case "m":
-      return 35;
+      return 52;
     case "s":
-      return 23;
+      return 40;
     default:
-      return 35;
+      return 40;
   }
 };
 
 export const Avatar: FunctionComponent<AvatarProps> = (props) => {
-  const { src, alt = "avatar", size = "m" } = props;
+  const { src, alt = "avatar", size = "s" } = props;
 
-  const currSize = getAvatarSize(size);
+  const avatarSize = getAvatarSize(size);
+
+  const imgSize = avatarSize - 10;
 
   return (
-    <Image
-      src={src}
+    <div
       className={style.avatar}
-      alt={alt}
-      width={currSize}
-      height={currSize}
-    ></Image>
+      style={{ width: avatarSize, height: avatarSize }}
+    >
+      <Image
+        src={src}
+        className={style.img}
+        alt={alt}
+        width={imgSize}
+        height={imgSize}
+      ></Image>
+    </div>
   );
 };
