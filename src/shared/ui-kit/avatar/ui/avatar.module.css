@@ -1,4 +1,14 @@
 .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #000;
+
+  border-radius: 50%;
+}
+
+.img {
   border-radius: 50%;
   object-fit: cover;
 }
