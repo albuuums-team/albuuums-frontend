@@ -57,8 +57,6 @@ export const Button: FunctionComponent<ButtonProps> = (props) => {
     extraProps,
   } = props;
 
-  console.log(getButtonClasses(view, width, classes));
-
   return (
     <button
       type={type}
