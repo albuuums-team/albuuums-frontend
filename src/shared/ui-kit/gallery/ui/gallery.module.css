@@ -1,0 +1,7 @@
+.gallery {
+  width: 100%;
+
+  display: grid;
+  grid: auto / repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
