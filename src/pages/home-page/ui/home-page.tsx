@@ -1,3 +1,4 @@
+import Input from '@/shared/ui-kit/input/ui/input'
 export const HomePage = () => {
-  return <div>Home Page</div>;
-};
+	return <Input placeholder='Поиск пользавателя' />
+}
