@@ -1,4 +1,6 @@
-import { FunctionComponent, HTMLAttributes, ReactNode } from "react";
+"use client";
+
+import { FunctionComponent, HTMLAttributes, ReactNode, useEffect } from "react";
 
 import style from "./dialog.module.css";
 import { createPortal } from "react-dom";
@@ -16,30 +18,36 @@ interface DialogProps {
 export const Dialog: FunctionComponent<DialogProps> = (props) => {
   const { isVisible, title, onClose, children, extraProps } = props;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      onClose();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [onClose]);
+
   if (!isVisible) {
     return null;
   }
 
-  return (
-    isVisible &&
-    createPortal(
-      <div className={style.overlay} onClick={onClose}>
-        <div
-          className={style.dialog}
-          onClick={(e) => e.stopPropagation()}
-          {...extraProps}
-        >
-          <div className={style.header}>
-            <span className={style.title}>{title}</span>
-            <IoCloseOutline
-              onClick={onClose}
-              fontSize={"40px"}
-            ></IoCloseOutline>
-          </div>
-          {children}
+  return createPortal(
+    <div className={style.overlay} onClick={onClose}>
+      <div
+        className={style.dialog}
+        onClick={(e) => e.stopPropagation()}
+        {...extraProps}
+      >
+        <div className={style.header}>
+          <span className={style.title}>{title}</span>
+          <IoCloseOutline onClick={onClose} fontSize={"40px"}></IoCloseOutline>
         </div>
-      </div>,
-      document.body
-    )
+        {children}
+      </div>
+    </div>,
+    document.body
   );
 };
