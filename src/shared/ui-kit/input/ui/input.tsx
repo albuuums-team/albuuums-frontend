@@ -1,13 +1,14 @@
 import { FunctionComponent, InputHTMLAttributes } from 'react'
-import { IoSearch } from 'react-icons/io5'
 import style from './input.module.css'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	placeholder: string
 }
+
 const Input: FunctionComponent<Props> = ({
 	placeholder,
 	children,
+
 	...rest
 }) => {
 	return (
@@ -16,8 +17,8 @@ const Input: FunctionComponent<Props> = ({
 				className={style['input-content']}
 				type='text'
 				placeholder={placeholder}
+				{...rest}
 			/>
-			<IoSearch className={style['icon']} />
 		</div>
 	)
 }
