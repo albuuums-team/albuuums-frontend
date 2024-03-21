@@ -1,0 +1,25 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 10;
+}
+
+.popup {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 355px;
+
+  padding: 20px;
+
+  background-color: #fff;
+  border-radius: 20px;
+}

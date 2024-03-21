@@ -1,1 +1,1 @@
-export * from './ui/dialog'
+export * from "./ui/dialog";

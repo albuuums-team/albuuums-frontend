@@ -1,6 +1,6 @@
 import {
   ButtonHTMLAttributes,
-  FunctionComponent,
+  forwardRef,
   MouseEventHandler,
   ReactNode,
 } from "react";
@@ -46,25 +46,28 @@ const getButtonClasses = (
   return currClasses.join(" ");
 };
 
-export const Button: FunctionComponent<ButtonProps> = (props) => {
-  const {
-    view = "default",
-    type = "button",
-    width = "auto",
-    onClick,
-    children,
-    classes = [],
-    extraProps,
-  } = props;
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(props, ref) {
+    const {
+      view = "default",
+      type = "button",
+      width = "auto",
+      onClick,
+      children,
+      classes = [],
+      extraProps,
+    } = props;
 
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={getButtonClasses(view, width, classes)}
-      {...extraProps}
-    >
-      {children}
-    </button>
-  );
-};
+    return (
+      <button
+        type={type}
+        onClick={onClick}
+        className={getButtonClasses(view, width, classes)}
+        {...extraProps}
+        ref={ref}
+      >
+        {children}
+      </button>
+    );
+  }
+);
