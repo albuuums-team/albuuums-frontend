@@ -1,3 +1,3 @@
 export const HomePage = () => {
-	return <div className=''>HomePage</div>
+	return <div> Home Page</div>
 }
