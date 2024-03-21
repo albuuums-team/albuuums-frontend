@@ -16,9 +16,11 @@ interface Props {
 	icon: IconType | null
 }
 
-const Input: FunctionComponent<Props> = ({
+export const Input: FunctionComponent<Props> = ({
 	placeholder,
 	children,
+	onChange,
+	onKeyDown,
 	icon,
 	...rest
 }) => {
@@ -32,8 +34,11 @@ const Input: FunctionComponent<Props> = ({
 					}}
 					type='text'
 					placeholder={placeholder}
+					onChange={onChange}
+					onKeyDown={onKeyDown}
 					{...rest}
 				/>
+				{children}
 			</div>
 		)
 	} else {
@@ -43,12 +48,13 @@ const Input: FunctionComponent<Props> = ({
 					className={style['input-content']}
 					type='text'
 					placeholder={placeholder}
+					onChange={onChange}
+					onKeyDown={onKeyDown}
 					{...rest}
 				/>
 				{React.createElement(icon)}
+				{children}
 			</div>
 		)
 	}
 }
-
-export default Input

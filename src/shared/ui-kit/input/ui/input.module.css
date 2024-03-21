@@ -11,18 +11,15 @@
 
 	position: relative;
 	box-sizing: border-box;
-	border: 3px solid rgba(0, 0, 0, 1);
+	border: 3px solid #000;
 	border-radius: 20px;
 
 	margin: 0 auto;
-	padding: 13px 13px;
+	padding: 13px 60px 13px 60px;
 	font-size: 18px;
 	line-height: 18px;
 	outline: none;
 }
-.input-content[type='text'] {
-	padding-left: 60px;
-}
 .input-content::placeholder {
-	opacity: 90%;
+	color: #808080;
 }
