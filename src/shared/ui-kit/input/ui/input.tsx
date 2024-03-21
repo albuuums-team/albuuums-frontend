@@ -6,14 +6,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 interface IconTypeProps {
-	width: number
-	height: number
+	width?: number
+	height?: number
 }
 
 type IconType = (props: IconTypeProps) => JSX.Element
 
 interface Props {
-	icon: IconType
+	icon: IconType | null
 }
 
 const Input: FunctionComponent<Props> = ({
@@ -22,19 +22,33 @@ const Input: FunctionComponent<Props> = ({
 	icon,
 	...rest
 }) => {
-	return (
-		<div className={style.input}>
-			<input
-				className={style['input-content']}
-				type='text'
-				placeholder={placeholder}
-				{...rest}
-			/>
-			<div className={style.icon}>
-				{React.createElement(icon, { width: 20, height: 20 })}
+	if (icon === null) {
+		return (
+			<div className={style.input}>
+				<input
+					className={style['input-content']}
+					style={{
+						padding: '13px 15px 13px 15px',
+					}}
+					type='text'
+					placeholder={placeholder}
+					{...rest}
+				/>
 			</div>
-		</div>
-	)
+		)
+	} else {
+		return (
+			<div className={style.input}>
+				<input
+					className={style['input-content']}
+					type='text'
+					placeholder={placeholder}
+					{...rest}
+				/>
+				{React.createElement(icon)}
+			</div>
+		)
+	}
 }
 
 export default Input
