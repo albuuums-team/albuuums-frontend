@@ -23,11 +23,9 @@ interface ButtonProps {
 const getButtonClasses = (
   view: ButtonView,
   width: ButtonWidth,
-  classes: string[] = []
+  extraClasses: string[] = []
 ) => {
   const currClasses: string[] = [];
-
-  currClasses.concat(classes);
 
   if (view === "outlined") {
     currClasses.push(style["button_outlined"]);
@@ -42,6 +40,10 @@ const getButtonClasses = (
   }
 
   currClasses.push(style.button);
+
+  for (const extraClass of extraClasses) {
+    currClasses.push(extraClass);
+  }
 
   return currClasses.join(" ");
 };
