@@ -1,52 +1,27 @@
-import React, { FunctionComponent, InputHTMLAttributes } from 'react'
-import style from './input.module.css'
+import { FunctionComponent, InputHTMLAttributes, ReactNode } from 'react';
+import style from './input.module.css';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-	placeholder: string
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+	icon?: ReactNode;
+	children: ReactNode;
+	onChange: () => void;
+	placeholder: string;
 }
 
-type IconType = () => JSX.Element
+export const Input: FunctionComponent<InputProps> = props => {
+	const { placeholder, children, onChange, icon, ...rest } = props;
 
-interface Props {
-	icon: IconType | null
-}
-
-export const Input: FunctionComponent<Props> = ({
-	placeholder,
-	children,
-	onChange,
-	icon,
-	...rest
-}) => {
-	if (icon === null) {
-		return (
-			<div className={style.input}>
-				<input
-					className={style['input-content']}
-					style={{
-						padding: '13px 15px 13px 15px',
-					}}
-					type='text'
-					placeholder={placeholder}
-					onChange={onChange}
-					{...rest}
-				/>
-				{children}
-			</div>
-		)
-	} else {
-		return (
-			<div className={style.input}>
-				<input
-					className={style['input-content']}
-					type='text'
-					placeholder={placeholder}
-					onChange={onChange}
-					{...rest}
-				/>
-				{React.createElement(icon)}
-				{children}
-			</div>
-		)
-	}
-}
+	return (
+		<div className={style.input}>
+			<input
+				className={style['input-content']}
+				type='text'
+				placeholder={placeholder}
+				onChange={onChange}
+				{...rest}
+			/>
+			{icon}
+			{children}
+		</div>
+	);
+};
