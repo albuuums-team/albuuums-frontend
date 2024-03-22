@@ -25,13 +25,15 @@ export const Popup: FunctionComponent<PopupProps> = (props) => {
 
   const [clientRect, setClientRect] = useState<DOMRect | null>(null);
 
+  const currAnchor = anchorRef.current;
+
   useEffect(() => {
-    if (anchorRef.current) {
-      const clientRect = anchorRef.current.getBoundingClientRect();
+    if (currAnchor) {
+      const clientRect = currAnchor.getBoundingClientRect();
 
       setClientRect(clientRect);
     }
-  }, [anchorRef]);
+  }, [currAnchor]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +59,8 @@ export const Popup: FunctionComponent<PopupProps> = (props) => {
           className={style.popup}
           {...extraProps}
           style={{
-            right: clientRect.x,
-            top: clientRect.y + clientRect.height + 20,
+            right: window.innerWidth - clientRect.right,
+            top: clientRect.top + clientRect.height + 20,
             ...extraProps?.style,
           }}
           onClick={(e) => e.stopPropagation()}

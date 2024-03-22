@@ -1,14 +1,15 @@
-import { FunctionComponent } from "react";
+import { forwardRef, MouseEventHandler } from "react";
 import style from "./avatar.module.css";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 type AvatarSize = "s" | "l";
 
 interface AvatarProps {
-  src: string;
+  src: string | StaticImageData;
   alt?: string;
   size?: AvatarSize;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const getAvatarSize = (size: AvatarSize) => {
@@ -22,8 +23,11 @@ const getAvatarSize = (size: AvatarSize) => {
   }
 };
 
-export const Avatar: FunctionComponent<AvatarProps> = (props) => {
-  const { src, alt = "avatar", size = "s" } = props;
+export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
+  props,
+  ref
+) {
+  const { src, alt = "avatar", size = "s", onClick = () => {} } = props;
 
   const avatarSize = getAvatarSize(size);
 
@@ -33,6 +37,8 @@ export const Avatar: FunctionComponent<AvatarProps> = (props) => {
     <div
       className={style.avatar}
       style={{ width: avatarSize, height: avatarSize }}
+      onClick={onClick}
+      ref={ref}
     >
       <Image
         src={src}
@@ -43,4 +49,4 @@ export const Avatar: FunctionComponent<AvatarProps> = (props) => {
       ></Image>
     </div>
   );
-};
+});
