@@ -8,3 +8,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+main {
+  height: calc(100vh - 52px);
+}
+
+body {
+  background-color: #f6f6f6;
+}
