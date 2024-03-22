@@ -1,15 +1,14 @@
-import { FunctionComponent, InputHTMLAttributes } from 'react';
-import { IoSearch } from 'react-icons/io5';
+import { FunctionComponent, InputHTMLAttributes, ReactNode } from 'react';
 import style from './input.module.css';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	placeholder: string;
+	onChange: () => void;
+	icon: ReactNode;
 }
-export const Input: FunctionComponent<Props> = ({
-	placeholder,
-	children,
-	...rest
-}) => {
+export const Input: FunctionComponent<InputProps> = props => {
+	const { placeholder, children, onChange, icon, ...rest } = props;
+
 	return (
 		<div className={style.input}>
 			<input
@@ -17,7 +16,6 @@ export const Input: FunctionComponent<Props> = ({
 				type='text'
 				placeholder={placeholder}
 			/>
-			<IoSearch className={style['icon']} />
 		</div>
 	);
 };
