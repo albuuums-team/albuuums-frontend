@@ -1,16 +1,18 @@
+"use client";
+
 import { Avatar } from "@/shared/ui-kit/avatar";
 import { Button } from "@/shared/ui-kit/button";
 import { Popup } from "@/shared/ui-kit/popup";
-import { signOut, useSession } from "next-auth/react";
-import { FunctionComponent, HTMLAttributes, RefObject } from "react";
+import { useSession } from "next-auth/react";
+import { FunctionComponent, HTMLAttributes, RefObject, useEffect } from "react";
 
 import style from "./profile-popup.module.css";
 
 import AvatarIcon from "@/shared/assets/icons/avatar.png";
-import Link from "next/link";
 
-import { CgProfile } from "react-icons/cg";
 import { IoExitOutline } from "react-icons/io5";
+import { useUnit } from "effector-react";
+import { logout } from "../model";
 
 interface ProfilePopupProps {
   isVisible: boolean;
@@ -22,7 +24,11 @@ interface ProfilePopupProps {
 export const ProfilePopup: FunctionComponent<ProfilePopupProps> = (props) => {
   const { isVisible, anchorRef, onClose, extraProps } = props;
 
+  const [logoutFn] = useUnit([logout]);
+
   const session = useSession();
+
+  console.log(session);
 
   const userAvatarSrc = session.data?.user?.image ?? AvatarIcon;
   const userName = session.data?.user?.name;
@@ -38,13 +44,7 @@ export const ProfilePopup: FunctionComponent<ProfilePopupProps> = (props) => {
         <Avatar src={userAvatarSrc} size="l"></Avatar>
         <span>{userName}</span>
       </div>
-      <Link href={"/profile"}>
-        <Button width="max" classes={[style.button]}>
-          <CgProfile fontSize={20}></CgProfile>
-          <span>Профиль</span>
-        </Button>
-      </Link>
-      <Button onClick={() => signOut()}>
+      <Button onClick={() => logoutFn()}>
         <IoExitOutline fontSize={20}></IoExitOutline>
         <span>Выйти</span>
       </Button>

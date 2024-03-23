@@ -8,3 +8,21 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+main {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  min-height: 100vh;
+
+  background-color: #f6f6f6;
+}
