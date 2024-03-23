@@ -10,9 +10,19 @@ a {
 }
 
 main {
-  height: calc(100vh - 52px);
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  min-height: 100vh;
+
   background-color: #f6f6f6;
 }
