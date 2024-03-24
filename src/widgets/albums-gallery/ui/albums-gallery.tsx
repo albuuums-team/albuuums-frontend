@@ -4,7 +4,7 @@ import { Gallery } from "@/shared/ui-kit/gallery";
 import { useUnit } from "effector-react";
 import { FunctionComponent, useEffect } from "react";
 import { $albums, $isLoading, dialog, getAlbums } from "../model";
-import AddAlbumCard from "@/entities/add-album-card/ui/add-album-card";
+import { AddAlbumCard } from "@/entities/add-album-card";
 import { useDialog } from "@/shared/libs/effector-dialog";
 import { AddAlbumDialog } from "@/features/add-album-dialog";
 import { AlbumCard } from "@/entities/album-card";

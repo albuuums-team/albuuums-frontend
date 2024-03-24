@@ -9,7 +9,7 @@ interface VideoCardProps {
   onClick: () => void;
 }
 
-const VideoCard: FunctionComponent<VideoCardProps> = (props) => {
+export const VideoCard: FunctionComponent<VideoCardProps> = (props) => {
   const { src, label, extraProps, onClick } = props;
 
   return (
@@ -19,5 +19,3 @@ const VideoCard: FunctionComponent<VideoCardProps> = (props) => {
     </div>
   );
 };
-
-export default VideoCard;

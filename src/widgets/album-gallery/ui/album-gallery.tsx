@@ -22,7 +22,7 @@ import { PhotoCard } from "@/entities/photo-card";
 import style from "./album-gallery.module.css";
 import { AddPhotoCard } from "@/features/add-photo-card";
 import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
-import VideoCard from "@/entities/video-card/ui/video-card";
+import { VideoCard } from "@/entities/video-card";
 import { PhotoDialog } from "@/features/photo-dialog";
 import { useDialog } from "@/shared/libs/effector-dialog";
 import { VideoDialog } from "@/features/video-dialog";

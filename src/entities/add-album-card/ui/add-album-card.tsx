@@ -9,7 +9,7 @@ interface AddAlbumCardProps {
   extraProps?: HTMLAttributes<HTMLDivElement>;
 }
 
-const AddAlbumCard: FunctionComponent<AddAlbumCardProps> = (props) => {
+export const AddAlbumCard: FunctionComponent<AddAlbumCardProps> = (props) => {
   const { onClick, extraProps } = props;
 
   return (
@@ -18,5 +18,3 @@ const AddAlbumCard: FunctionComponent<AddAlbumCardProps> = (props) => {
     </div>
   );
 };
-
-export default AddAlbumCard;

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import style from "./video-dialog.module.css";
 import { useUnit } from "effector-react";
-import { deleteFile } from "../model/model";
+import { deleteFile } from "../model";
 import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
 
 interface VideoDialogProps {
