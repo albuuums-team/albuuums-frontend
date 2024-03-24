@@ -12,7 +12,7 @@ interface CreateAlbumFxParams {
 const createAlbumFx = createEffect(async (params: CreateAlbumFxParams) => {
   const { callback, name, xAuthKey } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/albums/new?name=${name}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/albums/new?name=${name}`;
 
   const response = await fetch(url, {
     method: "POST",

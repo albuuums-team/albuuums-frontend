@@ -93,7 +93,7 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
         <div className={style.actions}>
           <a
             download={"album"}
-            href={`${PROTOCOL}://${DOMAIN_NAME}/api/files/download-album/${id}`}
+            href={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/download-album/${id}`}
           >
             <Button>Скачать альбом</Button>
           </a>
@@ -119,7 +119,7 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
               return (
                 <VideoCard
                   key={i}
-                  src={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${file["file_id"]}`}
+                  src={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${file["file_id"]}`}
                   extraProps={{ style: { height: "300px" } }}
                   onClick={() => {
                     setCurrFileIdFn(String(file["file_id"]));
@@ -132,7 +132,7 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
 
             return (
               <PhotoCard
-                src={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${file["file_id"]}`}
+                src={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${file["file_id"]}`}
                 key={i}
                 extraProps={{ style: { height: "300px" } }}
                 onClick={() => {

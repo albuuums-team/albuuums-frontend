@@ -22,7 +22,7 @@ interface FieldUpdate {
 const signupFx = createEffect(async (params: SignInParams) => {
   const { name, email, password } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/auth/signup?name=${name}&email=${email}&password=${password}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/auth/signup?name=${name}&email=${email}&password=${password}`;
 
   const response = await fetch(url, {
     method: "POST",

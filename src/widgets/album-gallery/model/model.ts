@@ -17,7 +17,7 @@ interface DeleteAlbumFxParams {
 const getAlbumDataFx = createEffect(async (params: GetAlbumDataFxParams) => {
   const { xAuthKey, id } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/albums/${id}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/albums/${id}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -39,7 +39,7 @@ const getAlbumDataFx = createEffect(async (params: GetAlbumDataFxParams) => {
 const deleteAlbumFx = createEffect(async (params: DeleteAlbumFxParams) => {
   const { xAuthKey, id, callback } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/albums/drop/${id}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/albums/drop/${id}`;
 
   const response = await fetch(url, {
     method: "DELETE",

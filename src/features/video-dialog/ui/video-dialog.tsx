@@ -41,7 +41,7 @@ export const VideoDialog: FunctionComponent<VideoDialogProps> = (props) => {
         <>
           <a
             download="file"
-            href={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${fileId}`}
+            href={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${fileId}`}
             target="_blank"
           >
             <Button>
@@ -73,7 +73,7 @@ export const VideoDialog: FunctionComponent<VideoDialogProps> = (props) => {
           controls
           preload="none"
           className={style.video}
-          src={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${fileId}`}
+          src={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${fileId}`}
         ></video>
       </div>
     </Dialog>

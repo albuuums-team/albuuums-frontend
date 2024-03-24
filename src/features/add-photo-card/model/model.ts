@@ -11,7 +11,7 @@ interface SendFilesFxParams {
 const sendFilesFx = createEffect(async (params: SendFilesFxParams) => {
   const { callback, id, fileList, xAuthKey } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/files/upload?public=true&pin_to=${id}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/upload?public=true&pin_to=${id}`;
 
   if (!fileList || !fileList.length) {
     return;

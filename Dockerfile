@@ -1,26 +1,19 @@
-# syntax=docker/dockerfile:1
-
 ARG NODE_VERSION=20.9.0
 
-
 FROM node:${NODE_VERSION}-alpine as base
-
-WORKDIR /usr/src/app
+WORKDIR /app
 
 FROM base as deps
+COPY package.json .
+COPY package-lock.json .
 
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
+RUN npm ci
 
 FROM deps as build
-
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci
-COPY . .
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY src ./src
+COPY package.json next.config.mjs tsconfig.json ./
 RUN npm run build
 
 FROM base as final
@@ -33,11 +26,10 @@ USER node
 
 COPY package.json .
 
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/.next ./.next
-COPY --from=build /usr/src/app/.next ./.next
-COPY --from=build /usr/src/app/next.config.mjs ./
-
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/next.config.mjs ./
 
 EXPOSE 3000
 

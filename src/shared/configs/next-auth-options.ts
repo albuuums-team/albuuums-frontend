@@ -15,7 +15,7 @@ export const nextAuthOptions: AuthOptions = {
           return null;
         }
 
-        const url = `${PROTOCOL}://${DOMAIN_NAME}/api/auth/signin?email=${credentials.email}&password=${credentials.password}`;
+        const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/auth/signin?email=${credentials.email}&password=${credentials.password}`;
 
         const response = await fetch(url, {
           method: "GET",

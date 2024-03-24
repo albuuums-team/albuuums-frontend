@@ -3,7 +3,7 @@ import { createEffect, createEvent, sample } from "effector";
 import { signOut } from "next-auth/react";
 
 const singOutFx = createEffect(async () => {
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/auth/logout`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/auth/logout`;
 
   const response = await fetch(url, {
     method: "GET",

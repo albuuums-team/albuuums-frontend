@@ -10,7 +10,7 @@ interface GetAlbumsFxParams {
 const getAlbumsFx = createEffect(async (params: GetAlbumsFxParams) => {
   const { xAuthKey } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/albums/get-my-albums`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/albums/get-my-albums`;
 
   const response = await fetch(url, {
     method: "GET",

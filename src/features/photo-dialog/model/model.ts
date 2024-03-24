@@ -11,7 +11,7 @@ interface DeleteFileFxParams {
 const deleteFileFx = createEffect(async (params: DeleteFileFxParams) => {
   const { xAuthKey, id, fileId, callback } = params;
 
-  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/albums/drop/${id}/file/${fileId}`;
+  const url = `${PROTOCOL}://${DOMAIN_NAME}/api/v1/albums/drop/${id}/file/${fileId}`;
 
   const response = await fetch(url, {
     method: "DELETE",

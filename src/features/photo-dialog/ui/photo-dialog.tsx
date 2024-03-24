@@ -41,7 +41,7 @@ export const PhotoDialog: FunctionComponent<PhotoDialogProps> = (props) => {
         <>
           <a
             download="file"
-            href={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${fileId}`}
+            href={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${fileId}`}
             target="_blank"
           >
             <Button>
@@ -71,7 +71,7 @@ export const PhotoDialog: FunctionComponent<PhotoDialogProps> = (props) => {
       <div className={style.content}>
         <Image
           className={style.image}
-          src={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${fileId}`}
+          src={`${PROTOCOL}://${DOMAIN_NAME}/api/v1/files/${fileId}`}
           alt=""
           fill
         ></Image>
