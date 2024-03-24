@@ -28,8 +28,6 @@ export const ProfilePopup: FunctionComponent<ProfilePopupProps> = (props) => {
 
   const session = useSession();
 
-  console.log(session);
-
   const userAvatarSrc = session.data?.user?.image ?? AvatarIcon;
   const userName = session.data?.user?.name;
 

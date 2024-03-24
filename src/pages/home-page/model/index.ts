@@ -1,1 +1,0 @@
-export { dialog } from "./model";

@@ -15,6 +15,7 @@ import { ProfilePopup } from "@/features/profile-popup";
 
 import { dialog } from "../model";
 import { useDialog } from "@/shared/libs/effector-dialog";
+import Link from "next/link";
 
 interface HeaderProps {}
 
@@ -29,10 +30,10 @@ export const Header: FunctionComponent<HeaderProps> = () => {
 
   return (
     <header className={style.header}>
-      <div className={style.logo}>
+      <Link href="/" className={style.logo}>
         <Logo></Logo>
         <span>Albuuums</span>
-      </div>
+      </Link>
       {session.status === "authenticated" ? (
         <Avatar
           src={userAvatarSrc}

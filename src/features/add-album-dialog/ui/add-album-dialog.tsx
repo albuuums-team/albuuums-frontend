@@ -2,8 +2,6 @@
 
 import { FunctionComponent, HTMLAttributes } from "react";
 
-import style from "./add-album-dialog.module.css";
-
 import { Dialog } from "@/shared/ui-kit/dialog";
 import { TextInput } from "@/shared/ui-kit/text-input";
 import { Button } from "@/shared/ui-kit/button";
@@ -14,14 +12,14 @@ import { useSession } from "next-auth/react";
 interface AddAlbumDialogProps {
   isVisible: boolean;
   onClose: () => void;
-  callback: () => Promise<any>;
+  callback?: () => void;
   extraProps?: HTMLAttributes<HTMLElement>;
 }
 
 export const AddAlbumDialog: FunctionComponent<AddAlbumDialogProps> = (
   props
 ) => {
-  const { isVisible, onClose, extraProps, callback } = props;
+  const { isVisible, onClose, extraProps, callback = async () => {} } = props;
   const [name, fieldUpdateFn, createAlbumFn] = useUnit([
     $name,
     fieldUpdate,
@@ -30,10 +28,16 @@ export const AddAlbumDialog: FunctionComponent<AddAlbumDialogProps> = (
 
   const session = useSession();
 
-  console.log(name);
+  //@ts-ignore
+  const cookie = session.data?.user?.cookie;
 
   return (
-    <Dialog isVisible={isVisible} onClose={onClose} title="Создать альбом">
+    <Dialog
+      isVisible={isVisible}
+      onClose={onClose}
+      title="Создать альбом"
+      extraProps={extraProps}
+    >
       <TextInput
         onChange={(e) => fieldUpdateFn(e.target.value)}
         placeholder="название альбома"
@@ -45,7 +49,7 @@ export const AddAlbumDialog: FunctionComponent<AddAlbumDialogProps> = (
           createAlbumFn({
             callback: callback,
             name: name,
-            xAuthKey: session.data?.user.cookie,
+            xAuthKey: cookie,
           });
 
           onClose();

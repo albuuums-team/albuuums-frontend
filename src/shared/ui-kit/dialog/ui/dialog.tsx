@@ -12,11 +12,12 @@ interface DialogProps {
   title?: string;
   onClose: () => void;
   children?: ReactNode;
+  actions?: ReactNode;
   extraProps?: HTMLAttributes<HTMLElement>;
 }
 
 export const Dialog: FunctionComponent<DialogProps> = (props) => {
-  const { isVisible, title, onClose, children, extraProps } = props;
+  const { isVisible, title, onClose, children, actions, extraProps } = props;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +44,13 @@ export const Dialog: FunctionComponent<DialogProps> = (props) => {
       >
         <div className={style.header}>
           <span className={style.title}>{title}</span>
-          <IoCloseOutline onClick={onClose} fontSize={"40px"}></IoCloseOutline>
+          <div className={style.actions}>
+            {actions}
+            <IoCloseOutline
+              onClick={onClose}
+              fontSize={"40px"}
+            ></IoCloseOutline>
+          </div>
         </div>
         {children}
       </div>

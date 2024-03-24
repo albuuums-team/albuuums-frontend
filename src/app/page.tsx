@@ -1,4 +1,4 @@
-import { HomePage } from "@/pages/home-page";
+import { HomePage } from "@/fsd-pages/home-page";
 
 const Page = () => {
   return <HomePage></HomePage>;

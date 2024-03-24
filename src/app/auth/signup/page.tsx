@@ -1,4 +1,4 @@
-import { SignupPage } from "@/pages/signup-page";
+import { SignupPage } from "@/fsd-pages/signup-page";
 import { FunctionComponent } from "react";
 
 interface PageProps {}
