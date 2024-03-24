@@ -9,3 +9,5 @@
 - `npm run dev` - запуск в дев режиме
 - `npm run build` - билд проекта
 - `npm run start` - старт проекта
+
+Яндекс Диск с файлами: https://disk.yandex.ru/d/oEJIFlEANmGLVg
