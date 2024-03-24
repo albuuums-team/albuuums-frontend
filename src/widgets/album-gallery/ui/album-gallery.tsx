@@ -165,6 +165,7 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
         fileId={currFileId}
         xAuthKey={cookie}
         callback={callback}
+        fileAlbumId={currFileAlbumId}
       ></VideoDialog>
     </div>
   );
