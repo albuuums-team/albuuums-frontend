@@ -13,8 +13,6 @@ const sendFilesFx = createEffect(async (params: SendFilesFxParams) => {
 
   const url = `${PROTOCOL}://${DOMAIN_NAME}/api/files/upload?public=true&pin_to=${id}`;
 
-  console.log(fileList?.["0"]);
-
   if (!fileList || !fileList.length) {
     return;
   }

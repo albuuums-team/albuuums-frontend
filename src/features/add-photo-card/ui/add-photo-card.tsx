@@ -32,8 +32,6 @@ export const AddPhotoCard: FunctionComponent<AddPhotoCardProps> = (props) => {
       </div>
       <input
         onChange={(e) => {
-          console.log(e.target.files);
-
           sendFilesFn({
             fileList: e.target.files,
             id: id,

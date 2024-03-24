@@ -1,32 +1,7 @@
 import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
 import { createDialog } from "@/shared/libs/effector-dialog";
+import { Album } from "@/shared/types";
 import { createEffect, createEvent, createStore, sample } from "effector";
-
-interface Tag {
-  tag: string;
-  fileAlbumId: number;
-}
-
-interface File {
-  id: number;
-  name: string;
-  pinned_at: string;
-  pinned_by: number;
-  type: string;
-  file_id: number;
-  tags: Tag[];
-}
-
-interface Album {
-  id: number;
-  name: string;
-  album_cover_id: number;
-  private: boolean;
-  editor: boolean;
-  description: string;
-  files: File[];
-  tags: string[];
-}
 
 interface GetAlbumDataFxParams {
   id: string;
@@ -89,14 +64,18 @@ export const $album = createStore<Album | null>(null);
 export const $isLoading = createStore(false);
 
 export const dialog = createDialog();
-export const $currSrc = createStore("");
+export const videoDialog = createDialog();
+export const $currFileId = createStore("");
+export const $currFileAlbumId = createStore("");
 
 export const getAlbumData = createEvent<GetAlbumDataFxParams>();
 export const deleteAlbum = createEvent<DeleteAlbumFxParams>();
 
-export const setCurrSrc = createEvent<string>();
+export const setCurrFileId = createEvent<string>();
+export const setCurrFileAlbumId = createEvent<string>();
 
-sample({ clock: setCurrSrc, target: $currSrc });
+sample({ clock: setCurrFileId, target: $currFileId });
+sample({ clock: setCurrFileAlbumId, target: $currFileAlbumId });
 
 sample({
   clock: getAlbumData,

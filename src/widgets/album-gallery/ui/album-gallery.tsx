@@ -8,8 +8,11 @@ import {
   deleteAlbum,
   dialog,
   getAlbumData,
-  $currSrc,
-  setCurrSrc,
+  setCurrFileId,
+  $currFileId,
+  videoDialog,
+  $currFileAlbumId,
+  setCurrFileAlbumId,
 } from "../model";
 import { useSession } from "next-auth/react";
 import { Button } from "@/shared/ui-kit/button";
@@ -22,6 +25,7 @@ import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
 import VideoCard from "@/entities/video-card/ui/video-card";
 import { PhotoDialog } from "@/features/photo-dialog";
 import { useDialog } from "@/shared/libs/effector-dialog";
+import { VideoDialog } from "@/features/video-dialog";
 
 interface AlbumGalleryProps {
   id: string;
@@ -35,18 +39,27 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
     isLoading,
     getAlbumDataFn,
     deleteAlbumFn,
-    currSrc,
-    setCurrSrcFn,
+    currFileId,
+    setCurrFileIdFn,
+    currFileAlbumId,
+    setCurrFileAlbumIdFn,
   ] = useUnit([
     $album,
     $isLoading,
     getAlbumData,
     deleteAlbum,
-    $currSrc,
-    setCurrSrc,
+    $currFileId,
+    setCurrFileId,
+    $currFileAlbumId,
+    setCurrFileAlbumId,
   ]);
 
   const { isVisible, open, close } = useDialog(dialog);
+  const {
+    isVisible: isVisibleVideoDialog,
+    open: openVideoDialog,
+    close: closeVideoDialog,
+  } = useDialog(videoDialog);
 
   const session = useSession();
 
@@ -66,23 +79,31 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
     return null;
   }
 
+  const callback = () => {
+    getAlbumDataFn({
+      id: id,
+      xAuthKey: cookie,
+    });
+  };
+
   return (
     <div className={style.widget}>
       <div className={style.header}>
         <h2 className={style.title}>{album?.name}</h2>
         <div className={style.actions}>
+          <a
+            download={"album"}
+            href={`${PROTOCOL}://${DOMAIN_NAME}/api/files/download-album/${id}`}
+          >
+            <Button>Скачать альбом</Button>
+          </a>
           {id !== String(baseAlbumId) && (
             <Button
               onClick={() =>
                 deleteAlbumFn({
                   id: id,
                   xAuthKey: cookie,
-                  callback: () => {
-                    getAlbumDataFn({
-                      id: id,
-                      xAuthKey: cookie,
-                    });
-                  },
+                  callback: callback,
                 })
               }
             >
@@ -100,6 +121,11 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
                   key={i}
                   src={`${PROTOCOL}://${DOMAIN_NAME}/api/files/${file["file_id"]}`}
                   extraProps={{ style: { height: "300px" } }}
+                  onClick={() => {
+                    setCurrFileIdFn(String(file["file_id"]));
+                    setCurrFileAlbumIdFn(String(file.id));
+                    openVideoDialog();
+                  }}
                 ></VideoCard>
               );
             }
@@ -110,7 +136,8 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
                 key={i}
                 extraProps={{ style: { height: "300px" } }}
                 onClick={() => {
-                  setCurrSrcFn(String(file["file_id"]));
+                  setCurrFileIdFn(String(file["file_id"]));
+                  setCurrFileAlbumIdFn(String(file.id));
                   open();
                 }}
               ></PhotoCard>
@@ -119,27 +146,26 @@ export const AlbumGallery: FunctionComponent<AlbumGalleryProps> = (props) => {
         <AddPhotoCard
           id={id}
           extraProps={{ style: { height: "300px" } }}
-          callback={() =>
-            getAlbumDataFn({
-              id: id,
-              xAuthKey: cookie,
-            })
-          }
+          callback={callback}
         ></AddPhotoCard>
       </Gallery>
       <PhotoDialog
         isVisible={isVisible}
         onClose={() => close()}
         id={id}
-        fileId={currSrc}
+        fileId={currFileId}
+        fileAlbumId={currFileAlbumId}
         xAuthKey={cookie}
-        callback={() =>
-          getAlbumDataFn({
-            id: id,
-            xAuthKey: cookie,
-          })
-        }
+        callback={callback}
       ></PhotoDialog>
+      <VideoDialog
+        isVisible={isVisibleVideoDialog}
+        onClose={() => closeVideoDialog()}
+        id={id}
+        fileId={currFileId}
+        xAuthKey={cookie}
+        callback={callback}
+      ></VideoDialog>
     </div>
   );
 };

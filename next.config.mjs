@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.**",
+        hostname: "albuuums.opolo.su",
         port: "",
       },
     ],

@@ -6,13 +6,14 @@ interface VideoCardProps {
   src: string;
   label?: ReactNode;
   extraProps?: HTMLAttributes<HTMLDivElement>;
+  onClick: () => void;
 }
 
 const VideoCard: FunctionComponent<VideoCardProps> = (props) => {
-  const { src, label, extraProps } = props;
+  const { src, label, extraProps, onClick } = props;
 
   return (
-    <div className={style.card} {...extraProps}>
+    <div className={style.card} {...extraProps} onClick={onClick}>
       <video controls preload="none" src={src} className={style.video}></video>
       <div className={style.label}>{label}</div>
     </div>

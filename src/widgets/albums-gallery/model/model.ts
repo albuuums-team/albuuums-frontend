@@ -1,28 +1,7 @@
 import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
 import { createDialog } from "@/shared/libs/effector-dialog";
+import { Album } from "@/shared/types";
 import { createEffect, createEvent, createStore, sample } from "effector";
-
-interface Tag {
-  tag: string;
-  fileAlbumId: number;
-}
-
-interface File {
-  src: string;
-  fileId: string;
-  tags: Tag[];
-}
-
-interface Album {
-  id: string;
-  name: string;
-  album_cover_id: number;
-  private: boolean;
-  editor: boolean;
-  description: string;
-  files: File[];
-  tags: string[];
-}
 
 interface GetAlbumsFxParams {
   xAuthKey: string;
