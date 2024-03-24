@@ -1,8 +1,7 @@
 import { DOMAIN_NAME, PROTOCOL } from "@/shared/configs/config";
 import { createEffect, createEvent, createStore, sample } from "effector";
-import { signOut } from "next-auth/react";
 
-type CallbackFn = () => Promise<any>;
+type CallbackFn = () => void;
 
 interface CreateAlbumFxParams {
   callback: CallbackFn;
@@ -23,10 +22,8 @@ const createAlbumFx = createEffect(async (params: CreateAlbumFxParams) => {
     },
   });
 
-  console.log(response);
-
   if (response.ok) {
-    await callback();
+    callback();
 
     return;
   }

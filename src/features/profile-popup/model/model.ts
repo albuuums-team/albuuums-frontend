@@ -12,8 +12,6 @@ const singOutFx = createEffect(async () => {
     },
   });
 
-  console.log(response);
-
   if (response.ok) {
     return;
   }

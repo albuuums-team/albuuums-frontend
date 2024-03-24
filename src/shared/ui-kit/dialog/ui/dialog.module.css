@@ -40,3 +40,9 @@
   font-weight: 600;
   line-height: 18px;
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

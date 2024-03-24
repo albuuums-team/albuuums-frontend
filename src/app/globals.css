@@ -22,6 +22,8 @@ body {
   flex-direction: column;
   gap: 20px;
 
+  padding: 20px;
+
   min-height: 100vh;
 
   background-color: #f6f6f6;

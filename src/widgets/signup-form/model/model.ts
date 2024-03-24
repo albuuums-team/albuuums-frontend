@@ -46,8 +46,6 @@ const signupFx = createEffect(async (params: SignInParams) => {
 
   const res = await response.json();
 
-  console.log(res);
-
   throw new Error(res.detail ?? "internal error");
 });
 
